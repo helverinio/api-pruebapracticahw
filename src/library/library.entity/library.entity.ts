@@ -17,8 +17,14 @@ export class LibraryEntity {
     @Column()
     city: string;
 
-    @Column()
-    schedule: string;
+    //HH:mm:ss
+    @Column({ type: 'time' })
+    openingHour: string;
+
+
+    //HH:mm:ss
+    @Column({ type: 'time' })
+    closingHour: string;
 
     @ManyToMany(() => BookEntity, (book) => book.libraries)
     books: BookEntity[];
