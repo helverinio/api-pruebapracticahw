@@ -21,7 +21,6 @@ export class LibraryEntity {
     @Column({ type: 'time' })
     openingHour: string;
 
-
     //HH:mm:ss
     @Column({ type: 'time' })
     closingHour: string;

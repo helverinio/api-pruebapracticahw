@@ -8,6 +8,7 @@ import { BookModule } from './book/book.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LibraryEntity } from './library/library.entity/library.entity';
 import { BookEntity } from './book/book.entity/book.entity';
+import { LibraryBookModule } from './library-book/library-book.module';
 
 @Module({
   imports: [LibraryModule, BookModule,
@@ -22,6 +23,7 @@ import { BookEntity } from './book/book.entity/book.entity';
       dropSchema: true,
       synchronize: true
     }),
+    LibraryBookModule,
   ],
   controllers: [AppController],
   providers: [AppService],
