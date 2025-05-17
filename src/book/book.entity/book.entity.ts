@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import { LibraryEntity } from "../../library/library.entity/library.entity";
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class BookEntity {
@@ -22,5 +22,6 @@ export class BookEntity {
     ISBN: string;
 
     @ManyToMany(() => LibraryEntity, (library) => library.books)
+    @JoinTable() 
     libraries: LibraryEntity[];
 }

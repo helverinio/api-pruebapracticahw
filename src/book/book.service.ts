@@ -17,11 +17,11 @@ export class BookService {
     }
 
     async findAll(): Promise<BookEntity[]> {
-        return this.bookRepository.find({relations: ["library"]});
+        return this.bookRepository.find({relations: ["libraries"]});
     }
 
     async findOne(id: string): Promise<BookEntity> {
-        const book: BookEntity = await this.bookRepository.findOne({ where: { id }, relations: ["library"] });
+        const book: BookEntity = await this.bookRepository.findOne({ where: { id }, relations: ["libraries"] });
         if (!book) {
             throw new BusinessLogicException("The book with id was not found", BusinessError.NOT_FOUND);
         }
