@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable prettier/prettier */
 export function BusinessLogicException(message: string, type: number) {
     this.message = message;
