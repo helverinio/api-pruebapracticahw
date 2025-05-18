@@ -5,7 +5,7 @@ import { BusinessErrorsInterceptor } from '../shared/interceptors/business-error
 import { LibraryBookService } from './library-book.service';
 import { BookDto } from '../book/book.dto/book.dto';
 import { plainToInstance } from 'class-transformer';
-import { BookEntity } from 'src/book/book.entity/book.entity';
+import { BookEntity } from '../book/book.entity/book.entity';
 
 @Controller('libraries')
 @UseInterceptors(BusinessErrorsInterceptor)
@@ -17,7 +17,7 @@ export class LibraryBookController {
         return await this.libraryBookService.addBookToLibrary(libraryId, bookId);
     }
 
-    @Get(':libraryid/books/:bookId')
+    @Get(':libraryId/books/:bookId')
     async findBookInLibrary(@Param('libraryId') libraryId: string, @Param('bookId') bookId: string) {
         return await this.libraryBookService.findBookFromLibrary(libraryId, bookId);
     }

@@ -51,7 +51,9 @@ export class BookService {
     }
 
     validatePublishedDate(book: BookEntity) {
-        if (book.publishedDate > new Date()) {
+        const publishedDate = new Date(book.publishedDate);
+        const today = new Date();
+        if (publishedDate > today) {
             throw new BusinessLogicException("The book's published date must be in the past or today", BusinessError.PRECONDITION_FAILED);
         }
     }

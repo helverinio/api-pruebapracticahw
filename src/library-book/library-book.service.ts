@@ -16,11 +16,11 @@ export class LibraryBookService {
         private readonly bookRepository: Repository<BookEntity>,
     ) {}
 
-    async addBookToLibrary(libraryId: string, bookId: string): Promise<void> {
+    async addBookToLibrary(libraryId: string, bookId: string): Promise<LibraryEntity> {
         const library = await this.validateIfLibraryExists(libraryId);
         const book = await this.validateIfBookExists(bookId);
         library.books = [...library.books, book];
-        await this.libraryRepository.save(library);
+        return await this.libraryRepository.save(library);
     }
 
     async findBooksToLibrary(libraryId: string): Promise<BookEntity[]> {
@@ -38,8 +38,7 @@ export class LibraryBookService {
     async updateBooksFromLibrary(libraryId: string, books: BookEntity[]): Promise<LibraryEntity> {
         const library = await this.validateIfLibraryExists(libraryId);
         for (let i = 0; i < books.length; i++) {
-            const book: BookEntity = await this.bookRepository.findOne({ where: { id: books[i].id } });
-            await this.validateIfBookExists(book.id);
+            await this.validateIfBookExists(books[i].id);
         }
         library.books = books;
         return await this.libraryRepository.save(library);

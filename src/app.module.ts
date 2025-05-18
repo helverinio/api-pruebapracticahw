@@ -11,7 +11,7 @@ import { BookEntity } from './book/book.entity/book.entity';
 import { LibraryBookModule } from './library-book/library-book.module';
 
 @Module({
-  imports: [LibraryModule, BookModule,
+  imports: [LibraryModule, BookModule, LibraryBookModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -23,7 +23,6 @@ import { LibraryBookModule } from './library-book/library-book.module';
       dropSchema: true,
       synchronize: true
     }),
-    LibraryBookModule,
   ],
   controllers: [AppController],
   providers: [AppService],
