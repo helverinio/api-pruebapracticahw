@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "e96bafc4-bee4-4b0c-8917-6d07a47912aa",
+		"name": "Libraries-Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43911642",
+		"_collection_link": "https://helvertwiesner.postman.co/workspace/Culturas-Gastronomicas~61d475be-254a-4229-9947-107ccc7370f1/collection/43911642-e96bafc4-bee4-4b0c-8917-6d07a47912aa?action=share&source=collection_link&creator=43911642"
+	},
+	"item": [
+		{
+			"name": "Create a valid library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data =pm.response.json();\r",
+							"pm.globals.set(\"library_id\",data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a valid library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Biblioteca Central\",\n    \"address\": \"Calle 123 #45-67\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"id\": \"9de82ceb-1d4d-429c-8c72-c1f5d41eda31\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a valid book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data =pm.response.json();\r",
+							"pm.globals.set(\"book_id\",data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Cien años de soledad\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"1967-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a valid book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Cien años de soledad\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"1967-05-30\",\n    \"ISBN\": \"9780307474728\",\n    \"id\": \"3dceca0f-4c10-482a-9a43-628708a7d055\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a valid book 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data =pm.response.json();\r",
+							"pm.globals.set(\"book_id2\",data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"1984\",\r\n  \"author\": \"George Orwell\",\r\n  \"publishedDate\": \"1949-06-08\",\r\n  \"ISBN\": \"9780451524935\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a valid book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Cien años de soledad\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"1967-05-30\",\n    \"ISBN\": \"9780307474728\",\n    \"id\": \"3dceca0f-4c10-482a-9a43-628708a7d055\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add book to library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"{{book_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add book to library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "359"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"167-Mzw5nm045DvEQKgVWW4lzy3g3ac\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 20:57:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"569b4702-5505-481d-bce0-816ad20fb1f3\",\n    \"name\": \"Biblioteca Central\",\n    \"address\": \"Calle 123 #45-67\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"books\": [\n        {\n            \"id\": \"61eef16b-6f55-4b50-930a-acdb5f0abea5\",\n            \"title\": \"Cien años de soledad\",\n            \"author\": \"Gabriel García Márquez\",\n            \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n            \"ISBN\": \"9780307474728\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Add book that doesn't exists to library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add book that doesn't exists to library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-82AE29omqPMxwx0v8hrC8t4sHMM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:37:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The book with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all books from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of libraries > '+0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "181"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b5-MUUyPX9ClQZ/rnpUnKIMDI6XZxk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:40:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n        \"title\": \"Cien años de soledad\",\n        \"author\": \"Gabriel García Márquez\",\n        \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n        \"ISBN\": \"9780307474728\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get a book from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"{{book_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a book from library",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "179"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b3-vU5qV88EPCH2ZQdYcslE60ZOZbQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:16:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"929b948f-19d9-4335-8212-1e8dba348f84\",\n    \"title\": \"Cien años de soledad\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n    \"ISBN\": \"9780307474728\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a book that is not associate to library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with the given id is not in the library\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"{{book_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a book that is not associate to library",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"{{book_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "79"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4f-c3zgSL53gXJXBtbNK9qagGd+Xt8\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:16:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The book with the given id is not in the library\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update books In Library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{book_id2}}\"\r\n   },\r\n      {\r\n       \"id\": \"{{book_id}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update books In Library",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{book_id2}}\"\r\n   },\r\n      {\r\n       \"id\": \"{{book_id}}\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "271"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10f-0+nYMl5NaKoF/9MfpOQaJ0XXA6k\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:27:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"44aa38b4-175c-438a-a736-7608ac33c956\",\n    \"name\": \"Biblioteca Central\",\n    \"address\": \"Calle 123 #45-67\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"books\": [\n        {\n            \"id\": \"7d0f0e77-7024-4ddc-b5b8-4ff80e052c77\"\n        },\n        {\n            \"id\": \"929b948f-19d9-4335-8212-1e8dba348f84\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update invalid books In Library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update invalid books In Library",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-e+H+g2RYQOFmQzHgVe8RirYshDw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:30:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The library with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Remove a book from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"{{book_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Remove a book from library",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"{{book_id2}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:34:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Remove a book from library that isn't associate it",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with the given id is not in the library\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}",
+						"books",
+						"{{book_id2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Remove a book from library that isn't associate it",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}/books/{{book_id2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}",
+								"books",
+								"{{book_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "79"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4f-c3zgSL53gXJXBtbNK9qagGd+Xt8\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:35:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The book with the given id is not in the library\"\n}"
+				}
+			]
+		}
+	]
+}

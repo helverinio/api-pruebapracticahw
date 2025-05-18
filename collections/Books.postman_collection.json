@@ -1,0 +1,745 @@
+{
+	"info": {
+		"_postman_id": "f9cf5e81-a88f-41f0-9012-7643adc21ebf",
+		"name": "Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43911642",
+		"_collection_link": "https://helvertwiesner.postman.co/workspace/Culturas-Gastronomicas~61d475be-254a-4229-9947-107ccc7370f1/collection/43911642-f9cf5e81-a88f-41f0-9012-7643adc21ebf?action=share&source=collection_link&creator=43911642"
+	},
+	"item": [
+		{
+			"name": "Create a valid book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data =pm.response.json();\r",
+							"pm.globals.set(\"book_id\",data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Cien años de soledad\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"1967-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a valid book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Cien años de soledad\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"1967-05-30\",\n    \"ISBN\": \"9780307474728\",\n    \"id\": \"3dceca0f-4c10-482a-9a43-628708a7d055\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create an invalid book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book's published date must be in the past or today\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Cien años de soledad\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"2030-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create an invalid book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The book's published date must be in the past or today\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of libraries > '+0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"226d94ec-fdb1-49e1-84c4-737537187bd9\",\n        \"title\": \"Cien años de soledad\",\n        \"author\": \"Gabriel García Márquez\",\n        \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n        \"ISBN\": \"9780307474728\",\n        \"libraries\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books/{{book_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books",
+						"{{book_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "194"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c2-X3U6UZQK4hu6qOfJ/3fm/XoyQqs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:56:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n    \"title\": \"Cien años de soledad\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n    \"ISBN\": \"9780307474728\",\n    \"libraries\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Update valid book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Cien años de soledad egunda edicion\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"2024-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books/{{book_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books",
+						"{{book_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update valid book",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Cien años de soledad egunda edicion\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"2024-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "180"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b4-WGoiyTb+vIIfMpayR4Mybl/e1dc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:05:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n    \"title\": \"Cien años de soledad egunda edicion\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"2024-05-30\",\n    \"ISBN\": \"9780307474728\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update a book that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Cien años de soledad egunda edicion\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"2024-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/books/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update valid book",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Cien años de soledad egunda edicion\",\r\n  \"author\": \"Gabriel García Márquez\",\r\n  \"publishedDate\": \"2024-05-30\",\r\n  \"ISBN\": \"9780307474728\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "180"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b4-WGoiyTb+vIIfMpayR4Mybl/e1dc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:05:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n    \"title\": \"Cien años de soledad egunda edicion\",\n    \"author\": \"Gabriel García Márquez\",\n    \"publishedDate\": \"2024-05-30\",\n    \"ISBN\": \"9780307474728\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/books/{{book_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books",
+						"{{book_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a book",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books/{{book_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:08:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete a book that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The book with id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/books/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"books",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a book that doesn't exist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/books/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"books",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3d-f4kLT3Z1BcNmaXYJt4BsiY3av+k\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:09:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The book with id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "default"
+		}
+	]
+}

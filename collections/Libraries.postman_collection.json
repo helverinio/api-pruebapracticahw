@@ -1,0 +1,845 @@
+{
+	"info": {
+		"_postman_id": "185c641d-0098-4955-b48e-11e2ed2f026f",
+		"name": "Libraries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43911642",
+		"_collection_link": "https://helvertwiesner.postman.co/workspace/Culturas-Gastronomicas~61d475be-254a-4229-9947-107ccc7370f1/collection/43911642-185c641d-0098-4955-b48e-11e2ed2f026f?action=share&source=collection_link&creator=43911642"
+	},
+	"item": [
+		{
+			"name": "Create a valid library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data =pm.response.json();\r",
+							"pm.globals.set(\"library_id\",data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a valid library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Biblioteca Central\",\n    \"address\": \"Calle 123 #45-67\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"id\": \"9de82ceb-1d4d-429c-8c72-c1f5d41eda31\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create an invalid library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The library's opening hour must be before the closing hour\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"18:00:00\",\r\n  \"closingHour\": \"08:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create an invalid library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The library's opening hour must be before the closing hour\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all libraries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of libraries > '+0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all libraries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"address\": \"Calle 123 #45-67\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"210b73f7-d16c-40dd-a728-7fb3823ebee2\",\r\n        \"name\": \"Biblioteca Central\",\r\n        \"address\": \"Calle 123 #45-67\",\r\n        \"city\": \"Bogotá\",\r\n        \"openingHour\": \"08:00:00\",\r\n        \"closingHour\": \"18:00:00\",\r\n        \"books\": []\r\n    },\r\n    {\r\n        \"id\": \"9de82ceb-1d4d-429c-8c72-c1f5d41eda31\",\r\n        \"name\": \"Biblioteca Central\",\r\n        \"address\": \"Calle 123 #45-67\",\r\n        \"city\": \"Bogotá\",\r\n        \"openingHour\": \"08:00:00\",\r\n        \"closingHour\": \"18:00:00\",\r\n        \"books\": []\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Get a library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a library",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "359"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"167-Oe3pXaX/zhpirDjujUUp7XBgw8Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:42:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2570f39a-2488-4e19-9a36-ae69b6f9eb2d\",\n    \"name\": \"Biblioteca Central\",\n    \"address\": \"Calle 123 #45-67\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"books\": [\n        {\n            \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n            \"title\": \"Cien años de soledad\",\n            \"author\": \"Gabriel García Márquez\",\n            \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n            \"ISBN\": \"9780307474728\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a library that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The library with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a library that doesn't exist",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-e+H+g2RYQOFmQzHgVe8RirYshDw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:44:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The library with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update a library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update a library",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "373"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"175-th+urAFH0BrGNL6pLKPYbHyNCsc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:48:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2570f39a-2488-4e19-9a36-ae69b6f9eb2d\",\n    \"name\": \"Nueva Biblioteca Central\",\n    \"address\": \"Avenida siempre viva 123\",\n    \"city\": \"Bogotá\",\n    \"openingHour\": \"08:00:00\",\n    \"closingHour\": \"18:00:00\",\n    \"books\": [\n        {\n            \"id\": \"5596b769-2883-46a3-8a9d-351c6ae4d171\",\n            \"title\": \"Cien años de soledad\",\n            \"author\": \"Gabriel García Márquez\",\n            \"publishedDate\": \"1967-05-30T05:00:00.000Z\",\n            \"ISBN\": \"9780307474728\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update a library that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The library with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update a library Copy",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-e+H+g2RYQOFmQzHgVe8RirYshDw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:49:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The library with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "delete a library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/{{library_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"{{library_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete a library",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/{{library_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"{{library_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:51:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "delete a library that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The library with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libraries",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete a library that doesn't exist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Biblioteca Central\",\r\n  \"address\": \"Avenida siempre viva 123\",\r\n  \"city\": \"Bogotá\",\r\n  \"openingHour\": \"08:00:00\",\r\n  \"closingHour\": \"18:00:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/libraries/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"libraries",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-e+H+g2RYQOFmQzHgVe8RirYshDw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 01:53:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The library with the given id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "default"
+		}
+	]
+}
